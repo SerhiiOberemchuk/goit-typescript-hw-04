@@ -34,7 +34,7 @@ export function Observer({ children, onContentEndVisible }: Props) {
     }, options);
 
     if (endContentRef.current) {
-      observer.observe(endContentRef.current);
+      observer.observe(endRef.current);
     }
 
     return () => {
