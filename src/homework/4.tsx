@@ -4,9 +4,10 @@ import noop from "lodash/noop";
 type MenuIds = "first" | "second" | "last";
 type Menu = { id: MenuIds; title: string };
 
+type SelectedMenu = { id?: MenuIds };
 // Додати тип Menu Selected
 type MenuSelected = {
-  selectedMenu: { id?: MenuIds };
+  selectedMenu: SelectedMenu;
 };
 const MenuSelectedContext = createContext<MenuSelected>({
   selectedMenu: {},
@@ -14,7 +15,7 @@ const MenuSelectedContext = createContext<MenuSelected>({
 
 // Додайте тип MenuAction
 type MenuAction = {
-  onSelectedMenu: (selection: { id: MenuIds }) => void;
+  onSelectedMenu: (selection: SelectedMenu) => void;
 };
 const MenuActionContext = createContext<MenuAction>({
   onSelectedMenu: noop,
@@ -26,7 +27,7 @@ type PropsProvider = {
 
 function MenuProvider({ children }: PropsProvider) {
   // Додати тип для SelectedMenu він повинен містити { id }
-  type SelectedMenu = { id?: MenuIds };
+
   const [selectedMenu, setSelectedMenu] = useState<SelectedMenu>({});
 
   const menuContextAction = useMemo(
